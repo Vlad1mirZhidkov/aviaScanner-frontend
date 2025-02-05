@@ -1,0 +1,57 @@
+.active-tickets-main {
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.results-title {
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-text);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.tickets-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 800px;
+}
+
+.ticket-card {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.ticket-card:hover {
+    transform: translateY(-2px);
+    background: var(--gradient-hover);
+    color: var(--color-white);
+}
+
+.ticket-icon {
+    font-size: 2.5rem;
+    margin-right: 1.5rem;
+    color: var(--color-primary);
+}
+
+.ticket-flight {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.ticket-route,
+.ticket-date,
+.ticket-price {
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+} 
