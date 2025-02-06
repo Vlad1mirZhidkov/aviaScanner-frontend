@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../static/css/mainPageStyle.css';
 import { FaBell, FaUserCircle, FaPlane, FaExchangeAlt, FaSearch } from 'react-icons/fa';
 
 const MainPage = () => {
     const navigate = useNavigate();
+    const [origin, setOrigin] = useState('');
+    const [destination, setDestination] = useState('');
 
     useEffect(() => {
         const bg = document.querySelector('.interactive-bg');
@@ -81,12 +83,17 @@ const MainPage = () => {
         };
     }, []);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-    };
+    const handleSubmit = (event) => {
+        event.preventDefault();
 
-    const handleSearchClick = () => {
-        navigate('/date');
+        // Проверяем, что оба поля не пусты
+        if (!origin || !destination) {
+            alert('Пожалуйста, заполните оба поля');
+            return;
+        }
+
+        // Переход на страницу DatePage с передачей state
+        navigate('/date', { state: { origin, destination } });
     };
 
     return (
@@ -120,12 +127,14 @@ const MainPage = () => {
                             <div className="search-form__field">
                                 <FaPlane className="field-icon" />
                                 <div className="field-content">
-                                    <label htmlFor="from" className="search-form__label">Откуда</label>
+                                    <label htmlFor="origin" className="search-form__label">Откуда</label>
                                     <input 
                                         type="text"
-                                        id="from"
+                                        id="origin"
                                         className="search-form__input"
                                         placeholder="Город вылета"
+                                        value={origin}
+                                        onChange={(e) => setOrigin(e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -137,18 +146,20 @@ const MainPage = () => {
                             <div className="search-form__field">
                                 <FaPlane className="field-icon" />
                                 <div className="field-content">
-                                    <label htmlFor="to" className="search-form__label">Куда</label>
+                                    <label htmlFor="destination" className="search-form__label">Куда</label>
                                     <input 
                                         type="text"
-                                        id="to"
+                                        id="destination"
                                         className="search-form__input"
                                         placeholder="Город прилета"
+                                        value={destination}
+                                        onChange={(e) => setDestination(e.target.value)}
                                     />
                                 </div>
                             </div>
                         </div>
 
-                        <button type="submit" className="search-button" onClick={handleSearchClick}>
+                        <button type="submit" className="search-button">
                             <FaSearch />
                             <span className="button-text">Найти рейсы</span>
                         </button>

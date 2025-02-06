@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import '../static/css/datesPageStyle.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { FaBell, FaUserCircle } from 'react-icons/fa';
 
 const DatesPage = () => {
     const navigate = useNavigate();
-    const [route] = useState({ departure: 'City N', arrival: 'City Z' });
+    const location = useLocation();
+    const { origin, destination } = location.state || { origin: "City N", destination: "City Z" };
     const [flights, setFlights] = useState([]);
 
     useEffect(() => {
@@ -94,16 +95,18 @@ const DatesPage = () => {
 
             <header className="header">
                 <div className="header__container">
-                    <h1 className="header__logo">AviaScan</h1>
+                    <Link to="/main" className="header__logo no-underline" aria-label="Главная страница">
+                        AviaScan
+                    </Link>
                     <nav className="header__nav">
                         <div className="header__buttons">
-                            <button className="header__notifications-btn" aria-label="Уведомления">
+                            <Link to="/notifications" className="header__notifications-btn no-underline" aria-label="Уведомления">
                                 <FaBell />
                                 <span className="notification-badge">3</span>
-                            </button>
-                            <button className="header__profile-btn" aria-label="Профиль">
+                            </Link>
+                            <Link to="/profile" className="header__profile-btn no-underline" aria-label="Профиль">
                                 <FaUserCircle />
-                            </button>
+                            </Link>
                         </div>
                     </nav>
                 </div>
@@ -111,7 +114,7 @@ const DatesPage = () => {
 
             <main className="main">
                 <h2 className="results-title">
-                    {route.departure} - {route.arrival}
+                    {origin} - {destination}
                 </h2>
 
                 <div className="dates-container">
@@ -128,11 +131,21 @@ const DatesPage = () => {
                 </div>
 
                 <div className="pagination">
-                    <button className="pagination__btn" onClick={handleDateClick}>1</button>
-                    <button className="pagination__btn" onClick={handleDateClick}>2</button>
-                    <button className="pagination__btn" onClick={handleDateClick}>3</button>
-                    <button className="pagination__btn" onClick={handleDateClick}>...</button>
-                    <button className="pagination__btn" onClick={handleDateClick}>n</button>
+                    <button type="button" className="pagination__btn">
+                        1
+                    </button>
+                    <button type="button" className="pagination__btn">
+                        2
+                    </button>
+                    <button type="button" className="pagination__btn">
+                        3
+                    </button>
+                    <button type="button" className="pagination__btn">
+                        ...
+                    </button>
+                    <button type="button" className="pagination__btn">
+                        n
+                    </button>
                 </div>
             </main>
         </div>

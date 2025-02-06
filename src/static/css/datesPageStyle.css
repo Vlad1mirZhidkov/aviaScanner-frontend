@@ -467,3 +467,8 @@ body {
     font-size: 1.1rem;
     font-weight: bold;
 }
+
+/* Добавляем класс no-underline для ссылок, чтобы убрать нижнее подчеркивание */
+.no-underline {
+    text-decoration: none;
+}
